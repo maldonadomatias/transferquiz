@@ -1,37 +1,43 @@
 import styled from "styled-components";
 import { Transfer } from "../interfaces/transfers";
 
-const Table = styled.table`
-  border-collapse: collapse;
+const Container = styled.div`
   width: 100%;
-  margin-top: 20px;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.2);
 `;
 
-const TableHead = styled.thead`
-  background-color: #007bff;
-  color: white;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-`;
-
-const TableHeaderCell = styled.th`
+const Row = styled.div<{ even?: boolean }>`
+  display: flex;
+  background-color: ${(props) =>
+    props.even ? "#f2f2f2" : "var(--white-color)"};
   padding: 10px;
-  text-align: left;
-  white-space: nowrap; /* Prevent text wrapping */
+  font-size: 1.5rem;
+  border-bottom: 1px solid #ccc;
 `;
 
-const TableDataCell = styled.td`
+const HeaderCell = styled.div`
+  flex: 1;
   padding: 10px;
-  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
 `;
 
-const TableBody = styled.tbody`
-  max-height: 100px;
+const DataCell = styled.div`
+  flex: 1;
+  padding: 10px;
+  white-space: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const Body = styled.div`
+  max-height: 250px;
   overflow-y: auto;
+  border: 1px solid #ccc;
 `;
 
 interface Props {
@@ -40,24 +46,22 @@ interface Props {
 
 const TableHistory = ({ currentPlayer }: Props) => {
   return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableHeaderCell>Old Club</TableHeaderCell>
-          <TableHeaderCell>New Club</TableHeaderCell>
-          <TableHeaderCell>Season</TableHeaderCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
+    <Container>
+      <Row>
+        <HeaderCell>Old Club</HeaderCell>
+        <HeaderCell>New Club</HeaderCell>
+        <HeaderCell>Season</HeaderCell>
+      </Row>
+      <Body>
         {currentPlayer.history.map((transfer, index) => (
-          <TableRow key={index}>
-            <TableDataCell>{transfer.oldClubName}</TableDataCell>
-            <TableDataCell>{transfer.newClubName}</TableDataCell>
-            <TableDataCell>{transfer.transferSeason}</TableDataCell>
-          </TableRow>
+          <Row key={index} even={index % 2 === 0}>
+            <DataCell>{transfer.oldClubName}</DataCell>
+            <DataCell>{transfer.newClubName}</DataCell>
+            <DataCell>{transfer.transferSeason}</DataCell>
+          </Row>
         ))}
-      </TableBody>
-    </Table>
+      </Body>
+    </Container>
   );
 };
 

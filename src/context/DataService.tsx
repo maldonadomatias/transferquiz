@@ -2,12 +2,13 @@ import axios from "axios";
 
 import { Clubs, Players, Transfer } from "../interfaces/transfers";
 
-const URL = "http://ec2-3-139-77-119.us-east-2.compute.amazonaws.com:8000";
+// const URL = "http://localhost:8000";
+const URL = process.env.TRANSFERMARKT_URL;
 
-const getClubs = async (): Promise<Clubs> => {
+async function getClubs(): Promise<Clubs> {
   const response = await axios.get(`${URL}/competitions/CDLP/clubs`);
   return response.data;
-};
+}
 
 const getPlayers = async (id: number): Promise<Players> => {
   const response = await axios.get(`${URL}/clubs/${id}/players`);

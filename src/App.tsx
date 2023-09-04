@@ -5,34 +5,21 @@ import { toast } from "react-hot-toast";
 import { Transfer } from "./interfaces/transfers";
 import { useData } from "./context/data-context";
 import Game from "./components/Game";
+import Start from "./components/Start";
 
 // Define styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 100vh;
+  height: 100vh;
   width: 100%;
+  padding: 5% 0;
 `;
 
 const LoadingMessage = styled.p`
   font-size: 16px;
   color: #888;
-`;
-
-const ScoreText = styled.p`
-  font-size: 20px;
-  margin-top: 20px;
-`;
-
-const Button = styled.button`
-  font-size: 16px;
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
 `;
 
 function App() {
@@ -117,12 +104,8 @@ function App() {
 
   return (
     <Container>
-      <ScoreText>Score: {score}</ScoreText>
       {!gameStarted ? (
-        <div>
-          <p>Click the "Start" button to begin the game!</p>
-          <Button onClick={startGame}>Start</Button>
-        </div>
+        <Start startGame={startGame} />
       ) : (
         <>
           {currentPlayer ? (
