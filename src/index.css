@@ -1,0 +1,167 @@
+:root {
+  --primary-color: #0e3347;
+  --primary-color-variant-1: rgba(14, 51, 71, 0.5);
+  --primary-color-variant-2: rgba(14, 51, 71, 0.29);
+  --primary-color-variant-3: rgba(14, 51, 71, 0.19);
+  --primary-color-variant-4: rgba(14, 51, 71, 0.05);
+  --secondary-color: #12a0bf;
+  --secondary-color-variant-1: rgba(18, 160, 191, 0.5);
+  --bg-color: #f5f5f5;
+  --tertiary-color: #e0e0e0;
+  --quaternary-color: #ca2e55;
+  --quinary-color: #ef767a;
+  --error-color: #ad1519;
+  --white-color: #ffffff;
+  --success-color: #01a04a;
+  --success-color-light: #d5ffe8;
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+html,
+body,
+#root {
+  font-family: "Poppins", "sans-serif";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+  font-size: 16px;
+  background: url("/Bienvenido.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+@media (max-width: 770px) {
+  html,
+  body,
+  #root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 470px) {
+  html,
+  body,
+  #root {
+    font-size: 13px;
+  }
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 2.625rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.p1 {
+  font-family: Poppins, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p2 {
+  font-family: Poppins, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p3 {
+  font-family: Poppins, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p4 {
+  font-family: Poppins, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p5 {
+  font-family: Poppins, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p6 {
+  font-family: Poppins, sans-serif;
+  font-size: 0.625rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.p7 {
+  font-family: Poppins, sans-serif;
+  font-size: 0.5rem;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: inherit !important;
+}
+
+.MuiDialog-paper {
+  max-width: 100% !important;
+}
