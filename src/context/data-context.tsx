@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 
 import { Clubs, Transfer } from "../interfaces/transfers";
 import dataService from "./DataService";
@@ -26,7 +25,7 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const clubs = await dataService.getClubs();
       setClubs(clubs);
     } catch (error) {
-      toast.error("Error fetching clubs");
+      getClubs(); // Retry
       throw error; // Re-throw the error to propagate it
     } finally {
       setLoadingClubs(false);
@@ -39,7 +38,7 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const randomIndex = Math.floor(Math.random() * players.players.length);
       return players.players[randomIndex].id;
     } catch (error) {
-      toast.error("Error fetching players");
+      getPlayers(id); // Retry
       throw error; // Re-throw the error to propagate it
     }
   };
@@ -49,7 +48,7 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const transfers = await dataService.getTransfers(parseInt(id));
       return transfers;
     } catch (error) {
-      toast.error("Error fetching transfers");
+      getTransfers(id); // Retry
       throw error; // Re-throw the error to propagate it
     }
   };
@@ -59,7 +58,7 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const data = await dataService.getBadge(parseInt(id));
       return data;
     } catch (error) {
-      toast.error("Error fetching badge");
+      getBadge(id); // Retry
       throw error; // Re-throw the error to propagate it
     }
   };
