@@ -6,6 +6,7 @@ import { Transfer } from "./interfaces/transfers";
 import { useData } from "./context/data-context";
 import Game from "./components/Game";
 import Start from "./components/Start";
+import Loader from "./components/ui/Loader";
 
 // Define styled components
 const Container = styled.div`
@@ -23,7 +24,7 @@ const LoadingMessage = styled.p`
 `;
 
 function App() {
-  const { fetchAndDisplayTransfers, getBadge } = useData();
+  const { fetchAndDisplayTransfers, getBadge, loadingClubs } = useData();
 
   const [loading, setLoading] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
@@ -31,7 +32,6 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState<Transfer | undefined>(
     {} as Transfer
   );
-  console.log("currentPlayer", currentPlayer);
   const [badge, setBadge] = useState<string>("");
   const [guess, setGuess] = useState("");
   const [score, setScore] = useState(0);
@@ -101,6 +101,8 @@ function App() {
     handleFetchAndDisplayTransfers,
     handleGiveUp,
   };
+
+  if (loadingClubs) return <Loader />;
 
   return (
     <Container>

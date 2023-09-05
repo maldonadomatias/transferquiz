@@ -1,12 +1,13 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { Transfer } from "../interfaces/transfers";
+import { Clubs, Transfer } from "../interfaces/transfers";
 import dataService from "./DataService";
 
 interface DataContextData {
   fetchAndDisplayTransfers: () => Promise<Transfer | undefined>;
   getBadge: (id: string) => Promise<string>;
+  loadingClubs?: boolean;
 }
 
 const DataContext = createContext<DataContextData | undefined>(undefined);
@@ -16,14 +17,19 @@ interface DataProviderProps {
 }
 
 const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
+  const [clubs, setClubs] = useState<Clubs | undefined>({} as Clubs);
+  const [loadingClubs, setLoadingClubs] = useState<boolean>(false);
+
   const getClubs = async () => {
+    setLoadingClubs(true);
     try {
       const clubs = await dataService.getClubs();
-      const randomIndex = Math.floor(Math.random() * clubs.clubs.length);
-      return clubs.clubs[randomIndex].id;
+      setClubs(clubs);
     } catch (error) {
       toast.error("Error fetching clubs");
       throw error; // Re-throw the error to propagate it
+    } finally {
+      setLoadingClubs(false);
     }
   };
 
@@ -51,9 +57,6 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const getBadge = async (id: string) => {
     try {
       const data = await dataService.getBadge(parseInt(id));
-      console.log('====================================');
-      console.log('data', data);
-      console.log('====================================');
       return data;
     } catch (error) {
       toast.error("Error fetching badge");
@@ -64,11 +67,13 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   // Main function to fetch and display the transfers
   const fetchAndDisplayTransfers = async () => {
     try {
-      const clubId = await getClubs();
-      const playerId = await getPlayers(clubId);
-      const transfers = await getTransfers(playerId);
-
-      return transfers;
+      if (clubs) {
+        const randomIndex = Math.floor(Math.random() * clubs.clubs.length);
+        const clubId = clubs.clubs[randomIndex].id;
+        const playerId = await getPlayers(clubId);
+        const transfers = await getTransfers(playerId);
+        return transfers;
+      }
     } catch (error) {
       console.error("Error fetching and displaying transfers:", error);
     }
@@ -77,7 +82,12 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const dataContextData: DataContextData = {
     fetchAndDisplayTransfers,
     getBadge,
+    loadingClubs,
   };
+
+  useEffect(() => {
+    getClubs();
+  }, []);
 
   return (
     <DataContext.Provider value={dataContextData}>
