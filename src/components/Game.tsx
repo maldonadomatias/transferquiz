@@ -8,12 +8,12 @@ const HistoryContainer = styled.div`
   align-items: center;
   gap: 2rem;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   padding: 0 5%;
 `;
 
 const Badge = styled.img`
-  height: 15vh;
+  height: 15dvh;
   max-width: 400px;
   margin: 0 auto;
 `;

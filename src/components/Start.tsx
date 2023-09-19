@@ -8,7 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   padding: 3% 0;
 `;
@@ -43,7 +43,7 @@ const Title = styled.div`
 `;
 
 const LogoImage = styled.img`
-  height: 45vh;
+  height: 45dvh;
   max-width: 400px;
   margin: 0 auto;
 `;
